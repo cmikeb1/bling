@@ -1,3 +1,0 @@
-#!/bin/bash
-HOME=/var/lib/openshift/562cbc8289f5cfcbaf000057/app-root/runtime/repo/
-npm install bower
