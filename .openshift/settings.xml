@@ -1,3 +1,22 @@
 <settings>
   <localRepository>$OPENSHIFT_DATA_DIR</localRepository>
-</settings>   
+
+  <activeProfiles>
+    <activeProfile>default</activeProfile>
+  </activeProfiles>
+  <profiles>
+    <profile>
+      <id>default</id>
+      <repositories>
+        <repository>
+          <id>spring-milestones</id>
+          <name>Spring Milestones</name>
+          <url>http://repo.spring.io/milestone</url>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+</settings>
