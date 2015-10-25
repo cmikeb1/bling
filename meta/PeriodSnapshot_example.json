@@ -1,0 +1,74 @@
+{
+  "categories": [
+    {
+      "id": "rec7hje109JEX7qCZ",
+      "createdDate": 1445727093000,
+      "name": "Entertainment",
+      "budget": 100.0,
+      "notes": "Movies, dates, etc.",
+      "transactions": null,
+      "transactionIds": null
+    },
+    {
+      "id": "recOE9yczZW6VeCec",
+      "createdDate": 1445727004000,
+      "name": "Gas",
+      "budget": 50.0,
+      "notes": "One fill up every two weeks.\n",
+      "transactions": null,
+      "transactionIds": null
+    },
+    {
+      "id": "recadEW5KF5yKdYUd",
+      "createdDate": 1445727004000,
+      "name": "Household",
+      "budget": 100.0,
+      "notes": "Think groceries minus food. Soap, vacuum bags, bags...things like that.\n\n",
+      "transactions": null,
+      "transactionIds": null
+    },
+    {
+      "id": "reczvlRKUr5psPEDq",
+      "createdDate": 1445727004000,
+      "name": "Food",
+      "budget": 100.0,
+      "notes": "Fast food, restaurants, etc.",
+      "transactions": [
+        {
+          "id": "rec4PS0MfmiRCq9PK",
+          "createdDate": 1445727701000,
+          "transactionDate": 1445666400000,
+          "categoryId": "reczvlRKUr5psPEDq",
+          "category": null,
+          "name": "Starbucks Snack",
+          "amount": 4.48
+        },
+        {
+          "id": "recGLXfgUtMz2Vhic",
+          "createdDate": 1445727722000,
+          "transactionDate": 1445666400000,
+          "categoryId": "reczvlRKUr5psPEDq",
+          "category": null,
+          "name": "7-Eleven Snack",
+          "amount": 1.34
+        },
+        {
+          "id": "recyTINzL48hbctdB",
+          "createdDate": 1445739612000,
+          "transactionDate": 1445666400000,
+          "categoryId": "reczvlRKUr5psPEDq",
+          "category": null,
+          "name": "Sushi",
+          "amount": 24.49
+        }
+      ],
+      "transactionIds": [
+        "rec4PS0MfmiRCq9PK",
+        "recGLXfgUtMz2Vhic",
+        "recyTINzL48hbctdB"
+      ]
+    }
+  ],
+  "startDay": 1444975200000,
+  "endDay": 1446184800000
+}

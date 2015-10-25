@@ -1,0 +1,21 @@
+{
+  "name": "bling",
+  "version": "0.0.1-SNAPSHOT",
+  "authors": [
+    "C. Mike Bylund <c.mike.bylund@imail.org>"
+  ],
+  "description": "UI Components for bling",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/main/resources/static/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.7",
+    "bootstrap": "~3.3.5"
+  }
+}

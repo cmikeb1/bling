@@ -1,0 +1,40 @@
+{
+  "records": [
+    {
+      "id": "rec4PS0MfmiRCq9PK",
+      "fields": {
+        "Name": "Starbucks Snack",
+        "Amount": 4.48,
+        "Category": [
+          "reczvlRKUr5psPEDq"
+        ],
+        "Date": "2015-10-24"
+      },
+      "createdTime": "2015-10-24T23:01:41.000Z"
+    },
+    {
+      "id": "recGLXfgUtMz2Vhic",
+      "fields": {
+        "Name": "7-Eleven Snack",
+        "Amount": 1.34,
+        "Category": [
+          "reczvlRKUr5psPEDq"
+        ],
+        "Date": "2015-10-24"
+      },
+      "createdTime": "2015-10-24T23:02:02.000Z"
+    },
+    {
+      "id": "recyTINzL48hbctdB",
+      "fields": {
+        "Name": "Sushi",
+        "Amount": 24.49,
+        "Category": [
+          "reczvlRKUr5psPEDq"
+        ],
+        "Date": "2015-10-24"
+      },
+      "createdTime": "2015-10-25T02:20:12.000Z"
+    }
+  ]
+}

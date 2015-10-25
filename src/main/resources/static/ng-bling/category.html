@@ -1,0 +1,6 @@
+<div class="col-md-6">
+  <h4>{{category.name}} <small>{{category.budget}}</small></h4>
+  <ul>
+    <li ng-repeat="transaction in category.transactions">{{transaction.name}} - ${{transaction.amount}}</li>
+  </ul>
+</div>
