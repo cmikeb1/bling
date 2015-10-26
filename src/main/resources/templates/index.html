@@ -20,15 +20,22 @@
   <link rel="stylesheet" href="../static/style/bling.css" th:href="@{/style/bling.css}"/>
 </head>
 <body ng-controller="BlingGlobalCtrl" ng-cloak="true">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <img ng-if="!snapshotData" src="/static/img/loading.gif" th:src="@{/img/loading.gif}"/>
-        <h2>{{snapshotData.startDay | date : 'MMM d'}} - {{snapshotData.endDay | date : 'MMM d'}}</h2>
-        <h2><small>{{snapshotData.now | date : 'longDate'}}</small></h2>
-      </div>
-      <category info="currentCategory" ng-repeat="currentCategory in snapshotData.categories"></category>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12 text-center">
+      <img ng-if="!snapshotData" src="/static/img/loading.gif" th:src="@{/img/loading.gif}"/>
+
+      <h2>{{snapshotData.startDay | date : 'MMM d'}} - {{snapshotData.endDay | date : 'MMM d'}}</h2>
+
+      <h2 id="currentDate">
+        <small>{{snapshotData.now | date : 'longDate'}}</small>
+      </h2>
+      <h4><span class="label"
+                ng-class="{'label-success': getNetAmount(), 'label-danger': !getNetAmount()}">{{getNetAmount(category) | currency}}</span>
+      </h4>
     </div>
+    <category info="currentCategory" ng-repeat="currentCategory in snapshotData.categories"></category>
   </div>
+</div>
 </body>
 </html>
