@@ -10,6 +10,10 @@
           th:src="@{/lib/angular/angular.min.js}"></script>
   <script type="text/javascript" src="../static/lib/bootstrap/dist/js/bootstrap.min.js"
           th:src="@{/lib/bootstrap/dist/js/bootstrap.min.js}"></script>
+  <script type="text/javascript" src="../static/lib/angular-bootstrap/ui-bootstrap.min.js"
+          th:src="@{/lib/angular-bootstrap/ui-bootstrap.min.js}"></script>
+  <script type="text/javascript" src="../static/lib/angular-bootstrap/ui-bootstrap-tpls.min.js"
+          th:src="@{/lib/angular-bootstrap/ui-bootstrap-tpls.min.js}"></script>
 
   <!-- Odie AngularJS Files -->
   <script type="text/javascript" src="../static/ng-bling/ng-bling.js" th:src="@{/ng-bling/ng-bling.js}"></script>
@@ -22,7 +26,7 @@
 <body ng-controller="BlingGlobalCtrl" ng-cloak="true">
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-12 text-center">
+    <div class="col-md-12 text-center">
       <img ng-if="!snapshotData" src="/static/img/loading.gif" th:src="@{/img/loading.gif}"/>
 
       <h2>{{snapshotData.startDay | date : 'MMM d'}} - {{snapshotData.endDay | date : 'MMM d'}}</h2>
@@ -31,8 +35,38 @@
         <small>{{snapshotData.now | date : 'longDate'}}</small>
       </h2>
       <h4><span class="label"
-                ng-class="{'label-success': getNetAmount(), 'label-danger': !getNetAmount()}">{{getNetAmount(category) | currency}}</span>
+                ng-class="{'label-success': getTypeForMainMoneyBar() === 'success',
+                 'label-danger':  getTypeForMainMoneyBar() === 'danger',
+                  'label-warning': getTypeForMainMoneyBar() === 'warning'}">{{getTotalAmountLeft(category) | currency}}</span>
       </h4>
+    </div>
+    <div class="col-lg-12">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+          <div class="row">
+            <div class="col-xs-6">
+              <p class="above-bar-text">{{getDaysInPeriod() - getDaysElapsed() | number:0}}</p>
+            </div>
+            <div class="col-xs-6 text-right">
+              <p class="above-bar-text">{{getDaysElapsed() | number:0}} / {{getDaysInPeriod() | number:0}} days</p>
+            </div>
+          </div>
+          <uib-progressbar id="mainTimeBar" value="getMainTimeBarPercentage()" type="{{getTypeForMainTimeBar()}}">
+            <strong>{{getMainTimeBarPercentage()}}%</strong>
+          </uib-progressbar>
+          <uib-progressbar id="mainMoneyBar" value="getMainMoneyBarPercentage()" type="{{getTypeForMainMoneyBar()}}">
+            <strong>{{getMainMoneyBarPercentage()}}%</strong>
+          </uib-progressbar>
+          <div class="row">
+            <div class="col-xs-6">
+              <p class="below-bar-text">{{getTotalAmountLeft() | currency}}</p>
+            </div>
+            <div class="col-xs-6 text-right">
+              <p class="below-bar-text">{{getTotalAmountPaid() | currency}} / {{getTotalBudget() | currency}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <category info="currentCategory" ng-repeat="currentCategory in snapshotData.categories"></category>
   </div>
