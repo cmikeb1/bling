@@ -3,4 +3,4 @@ airtable:
 
 spring.thymeleaf.cache: false
 
-access.chase.password: 
+access.chase.password: nope

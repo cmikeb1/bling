@@ -22,7 +22,7 @@ public class TransactionsFromBankService {
 
     public List<Transaction> getTransactionsLast7Days() {
         Date startDate = new Date(new Date().getTime() - MS_IN_DAY * 7);
-        Date endDate = new Date();
+        Date endDate = null;//new Date();
 
         List<net.sf.ofx4j.domain.data.common.Transaction> sourceTransactions = chaseCreditRepository.getTransactionsBetween(startDate, endDate);
 

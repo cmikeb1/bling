@@ -3,7 +3,9 @@ angular.module('bling', ['ui.bootstrap'])
 
     })
     .controller('PendingCtrl', function ($scope, $http) {
-
+        $http.get("/api/source-transactions").success(function (data) {
+            $scope.sourceTransactions = data;
+        });
     })
     .controller('MainViewCtrl', function ($scope, $http) {
 
