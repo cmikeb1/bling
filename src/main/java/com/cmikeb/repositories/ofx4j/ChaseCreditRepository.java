@@ -2,6 +2,7 @@ package com.cmikeb.repositories.ofx4j;
 
 import net.sf.ofx4j.OFXException;
 import net.sf.ofx4j.client.*;
+import net.sf.ofx4j.client.impl.BaseFinancialInstitutionData;
 import net.sf.ofx4j.client.impl.FinancialInstitutionServiceImpl;
 import net.sf.ofx4j.client.impl.LocalResourceFIDataStore;
 import net.sf.ofx4j.domain.data.banking.BankAccountDetails;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Date;
 import java.util.List;
 
@@ -39,10 +41,16 @@ public class ChaseCreditRepository {
         try {
             Resource resource = resourceLoader.getResource("classpath:ofx/institutions.xml");
 
-            File institutions = resource.getFile();
-            FinancialInstitutionData data = new LocalResourceFIDataStore(institutions).getInstitutionData("636");
+            BaseFinancialInstitutionData chaseData = new BaseFinancialInstitutionData();
+            chaseData.setId("636");
+            chaseData.setFinancialInstitutionId("10898");
+            chaseData.setName("JPMorgan Chase Bank (credit cards)");
+            chaseData.setOFXURL(new URL("https://ofx.chase.com"));
+            chaseData.setOrganization("B1");
+
             FinancialInstitutionService service = new FinancialInstitutionServiceImpl();
-            FinancialInstitution financialInstitution = service.getFinancialInstitution(data);
+            FinancialInstitution financialInstitution = service.getFinancialInstitution(chaseData);
+
 
             BankAccountDetails bankAccountDetails = new BankAccountDetails();
 
