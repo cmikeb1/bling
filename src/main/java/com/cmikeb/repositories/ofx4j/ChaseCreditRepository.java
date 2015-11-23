@@ -8,6 +8,7 @@ import net.sf.ofx4j.domain.data.banking.BankAccountDetails;
 import net.sf.ofx4j.domain.data.common.Transaction;
 import net.sf.ofx4j.domain.data.creditcard.CreditCardAccountDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,8 @@ import java.util.List;
 @Service
 public class ChaseCreditRepository {
 
-    private static final String PWORD = "";
+    @Value("${access.chase.password}")
+    private String PWORD;
     private static final String UNAME = "cmikeb01";
     private static final String CC_FREEDOM = "4266841270686775";
 
