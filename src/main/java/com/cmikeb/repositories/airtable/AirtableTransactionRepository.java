@@ -25,7 +25,9 @@ public class AirtableTransactionRepository extends AirtableBaseRepository {
         List<AirtableRecord> airtableRecords = fetchAllRecords();
         List<Transaction> transactions = new ArrayList<>();
         for (AirtableRecord record : airtableRecords) {
-            transactions.add(mapTransaction(record));
+            if (record.getFields().get("Name") != null) {
+                transactions.add(mapTransaction(record));
+            }
         }
         return transactions;
     }

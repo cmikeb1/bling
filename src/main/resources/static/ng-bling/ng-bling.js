@@ -1,6 +1,12 @@
 angular.module('bling', ['ui.bootstrap'])
     .controller('BlingGlobalCtrl', function ($scope, $http) {
 
+    })
+    .controller('PendingCtrl', function ($scope, $http) {
+
+    })
+    .controller('MainViewCtrl', function ($scope, $http) {
+
         var MS_IN_DAY = 86400000;
 
         $http.get("/api/snapshot").success(function (data) {
@@ -95,10 +101,8 @@ angular.module('bling', ['ui.bootstrap'])
 
             return total;
         };
-
     })
-    .
-    directive('category', function () {
+    .directive('category', function () {
 
         function linkFunction(scope) {
             scope.sumTransactionAmounts = function (transactions) {
