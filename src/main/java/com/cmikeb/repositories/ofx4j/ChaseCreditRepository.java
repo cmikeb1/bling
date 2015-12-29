@@ -8,6 +8,7 @@ import net.sf.ofx4j.client.impl.LocalResourceFIDataStore;
 import net.sf.ofx4j.domain.data.banking.BankAccountDetails;
 import net.sf.ofx4j.domain.data.common.Transaction;
 import net.sf.ofx4j.domain.data.creditcard.CreditCardAccountDetails;
+import org.jasypt.encryption.StringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -31,6 +32,9 @@ public class ChaseCreditRepository {
     private String PWORD;
     private static final String UNAME = "cmikeb01";
     private static final String CC_FREEDOM = "4266841270686775";
+
+    @Autowired
+    private StringEncryptor stringEncryptor;
 
 
     @Autowired
@@ -56,7 +60,9 @@ public class ChaseCreditRepository {
 
             CreditCardAccountDetails creditCardAccountDetails = new CreditCardAccountDetails();
             creditCardAccountDetails.setAccountNumber(CC_FREEDOM);
-            CreditCardAccount creditCardAccount = financialInstitution.loadCreditCardAccount(creditCardAccountDetails, UNAME, PWORD);
+            String decryptedPassword = stringEncryptor.decrypt(PWORD);
+            CreditCardAccount creditCardAccount = financialInstitution.loadCreditCardAccount(creditCardAccountDetails,
+                    UNAME, decryptedPassword);
 
             AccountStatement accountStatement = creditCardAccount.readStatement(startDate, endDate);
 
@@ -70,5 +76,4 @@ public class ChaseCreditRepository {
 
         return null;
     }
-
 }

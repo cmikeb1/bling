@@ -22,3 +22,11 @@ p.above-bar-text, p.below-bar-text {
     padding-left: 4px;
     padding-right: 4px;
 }
+
+.category-item {
+    margin-bottom: 20px;
+}
+
+.category-transactions {
+    margin-top: 10px;
+}

@@ -1,5 +1,6 @@
 package com.cmikeb.repositories.airtable;
 
+import com.cmikeb.models.airtable.AirtableCreateRecord;
 import com.cmikeb.models.airtable.AirtableRecord;
 import com.cmikeb.models.airtable.AirtableResult;
 import org.slf4j.Logger;
@@ -40,6 +41,19 @@ public abstract class AirtableBaseRepository {
         HttpEntity<AirtableResult> result = restTemplate.exchange(AIRTABLE_URI + getTableId(), HttpMethod.GET, httpEntity, AirtableResult.class);
         log.info(String.format("Found %d records for table %s", result.getBody().getRecords().size(), getTableId()));
         return result.getBody().getRecords();
+    }
+
+    protected AirtableRecord postNewRecord(AirtableCreateRecord airtableRecord) {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer " + airtableApiKey);
+        HttpEntity<?> httpEntity = new HttpEntity<>(airtableRecord, headers);
+        log.info(httpEntity.getBody().toString());
+
+        log.info(String.format("Posting new record to table %s", getTableId()));
+        HttpEntity<AirtableRecord> result = restTemplate.exchange(AIRTABLE_URI + getTableId(), HttpMethod.POST, httpEntity, AirtableRecord.class);
+        log.info(String.format("Successfully created record with id %s", result.getBody().getId()));
+        return result.getBody();
     }
 
     protected Date parseDate(String dateString) {

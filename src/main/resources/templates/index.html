@@ -25,7 +25,7 @@
         <div class="col-xs-12 col-sm-6 col-sm-offset-3">
           <div class="row">
             <div class="col-xs-6">
-              <p class="above-bar-text">{{getDaysInPeriod() - getDaysElapsed() | number:0}}</p>
+              <p class="above-bar-text">{{getDaysInPeriod() - getDaysElapsed() | number:0}} days left</p>
             </div>
             <div class="col-xs-6 text-right">
               <p class="above-bar-text">{{getDaysElapsed() | number:0}} / {{getDaysInPeriod() | number:0}} days</p>
@@ -49,6 +49,7 @@
       </div>
     </div>
     <category info="currentCategory" ng-repeat="currentCategory in snapshotData.categories"></category>
+    <br/>
   </div>
 </div>
 </body>

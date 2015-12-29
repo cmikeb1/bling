@@ -1,0 +1,48 @@
+<div class="modal-header">
+  <h3 class="modal-title">New Transaction</h3>
+</div>
+<div class="modal-body">
+  <form name="transactionForm">
+    <div class="form-group">
+      <label for="transactionName">Name</label>
+      <input ng-model="transaction.name" ng-required="true" type="text" class="form-control" id="transactionName"
+             placeholder="Name"/>
+    </div>
+    <div class="form-group">
+      <label for="transactionAmount">Amount</label>
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input ng-model="transaction.amount" ng-required="true" type="number" placeholder="0.00" class="form-control"
+               id="transactionAmount"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="transactionDate">Date</label>
+      <div class="input-group">
+        <input id="transactionDate" type="text" class="form-control" uib-datepicker-popup="{{format}}"
+               ng-model="transaction.date" datepicker-options="dateOptions"
+               ng-required="true" close-text="Close" is-open="dateModalOpened"/>
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="open($event)">
+            <i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+      </div>
+    </div>
+    <img ng-if="!categories" src="/img/ajax_load.GIF"/>
+    <div class="form-group" ng-hide="!categories">
+      <label for="transactionCategory">Category</label>
+      <select ng-model="transaction.category" ng-options="category as category.name for category in categories"
+              ng-required="true" class="form-control" id="transactionCategory"></select>
+    </div>
+    <div class="form-group">
+      <label for="transactionNotes">Notes</label>
+      <textarea ng-model="transaction.notes" class="form-control" id="transactionNotes"></textarea>
+    </div>
+  </form>
+
+</div>
+<div class="modal-footer">
+  <span class="pull-left text-danger" ng-if="error">{{error}}</span>
+  <button class="btn btn-primary" type="button" ng-click="create()">Create</button>
+  <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>
