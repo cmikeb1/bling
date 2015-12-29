@@ -30,3 +30,25 @@ p.above-bar-text, p.below-bar-text {
 .category-transactions {
     margin-top: 10px;
 }
+
+.category-add-icon {
+    opacity: .8;
+}
+
+.category-add-icon:hover {
+    opacity: 1;
+    cursor:pointer;
+}
+
+#categories {
+    margin-top: 20px;
+}
+
+#uiBars{
+    margin-bottom: 40px;
+}
+
+.category-time-bar {
+    opacity: .25;
+    margin-top: -40px;
+}

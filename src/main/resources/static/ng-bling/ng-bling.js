@@ -20,7 +20,7 @@ angular.module('bling', ['ui.bootstrap'])
             });
         };
 
-        $scope.$on("AddNewTransaction", function(scope, category) {
+        $scope.$on("AddNewTransaction", function (scope, category) {
             $log.log(category);
             var categoryItem = {
                 id: category.id,
@@ -52,7 +52,7 @@ angular.module('bling', ['ui.bootstrap'])
                     id: data[x].id
                 };
                 $scope.categories.push(newCat);
-                if($scope.transaction.category && $scope.transaction.category.id === newCat.id) {
+                if ($scope.transaction.category && $scope.transaction.category.id === newCat.id) {
                     $scope.transaction.category = newCat;
                 }
             }
@@ -92,11 +92,11 @@ angular.module('bling', ['ui.bootstrap'])
 
         var MS_IN_DAY = 86400000;
 
-        $scope.$on("TransactionCreated", function() {
+        $scope.$on("TransactionCreated", function () {
             $scope.refreshSnapshot();
         });
 
-        $scope.refreshSnapshot = function() {
+        $scope.refreshSnapshot = function () {
             $http.get("/api/snapshot").success(function (data) {
                 $scope.snapshotData = data;
             });
@@ -207,26 +207,27 @@ angular.module('bling', ['ui.bootstrap'])
                 return total;
             };
 
-            scope.getCategoryTimeBarPercentage = function (category) {
-                if (!category)
+            scope.getCategoryMoneyBarPercentage = function () {
+                if (!scope.category)
                     return;
 
-                var amountSpentPercentage = scope.sumTransactionAmounts(category.transactions) / category.budget * 100;
+                var amountSpentPercentage = scope.sumTransactionAmounts(scope.category.transactions) / scope.category.budget * 100;
                 return Math.round(amountSpentPercentage);
             };
 
-            scope.getTypeForCategoryMoneyBar = function (balance) {
-                if (balance > 5)
-                    return "success";
-                else if (balance < -5)
-                    return "danger";
-                else
-                    return "warning";
+            scope.getTypeForCategoryMoneyBar = function () {
 
-                return "danger";
+                if (scope.getCategoryMoneyBarPercentage() > scope.percentageThroughPeriod) {
+                    return "warning";
+                }
+                else if (scope.getCategoryMoneyBarPercentage() > 100) {
+                    return "danger";
+                }
+
+                return "success";
             };
 
-            scope.newTransactionModal = function(categoryName) {
+            scope.newTransactionModal = function (categoryName) {
                 scope.$emit("AddNewTransaction", categoryName);
             };
         }
@@ -235,7 +236,8 @@ angular.module('bling', ['ui.bootstrap'])
             restrict: 'E',
             link: linkFunction,
             scope: {
-                category: '=info'
+                category: '=info',
+                percentageThroughPeriod: '=percent'
             },
             templateUrl: '/ng-bling/category.html'
         };
