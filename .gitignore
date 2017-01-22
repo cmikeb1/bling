@@ -43,3 +43,5 @@ hs_err_pid*
 
 # Created by .ignore support plugin (hsz.mobi)
 src/main/resources/static/lib
+.idea
+bling.iml
