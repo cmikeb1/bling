@@ -45,7 +45,7 @@ public class AirtableTransactionRepository extends AirtableBaseRepository {
         transaction.setId(record.getId());
         transaction.setCreatedDate(record.getCreatedTime());
         transaction.setName((String) record.getFields().get("Name"));
-        transaction.setAmount((Double) record.getFields().get("Amount"));
+        transaction.setAmount(Double.parseDouble(record.getFields().get("Amount").toString()));
 
         String dateString = (String) record.getFields().get("Date");
         transaction.setTransactionDate(parseDate(dateString));
