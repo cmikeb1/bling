@@ -1,0 +1,9 @@
+{
+  "name": "bling",
+  "version": "1.0.0",
+  "description": "Visual budgeting",
+  "author": "cmikeb1@gmail.com",
+  "dependencies": {
+    "bower": "^1.8.0"
+  }
+}
