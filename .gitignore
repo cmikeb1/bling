@@ -45,3 +45,4 @@ hs_err_pid*
 src/main/resources/static/lib
 .idea
 bling.iml
+target
