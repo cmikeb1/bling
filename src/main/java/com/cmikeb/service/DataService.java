@@ -1,6 +1,7 @@
 package com.cmikeb.service;
 
 import com.cmikeb.models.dao.PeriodSnapshot;
+import com.cmikeb.models.dao.TransactionDAO;
 import com.cmikeb.models.domain.Category;
 import com.cmikeb.models.domain.Constants;
 import com.cmikeb.models.domain.Transaction;
@@ -69,6 +70,10 @@ public class DataService {
             return periodStart;
         } else
             return periodEnd;
+    }
+
+    public Transaction createTransaction(TransactionDAO transactionDAO) {
+        return airtableRepoService.getTransactionRepo().createTransaction(transactionDAO);
     }
 
 }

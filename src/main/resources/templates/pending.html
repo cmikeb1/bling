@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" ng-app="bling">
+<head th:replace="head :: head">
+</head>
+<body ng-controller="BlingGlobalCtrl" ng-cloak="true">
+<nav th:replace="nav::nav"></nav>
+<div class="container-fluid" ng-controller="PendingCtrl">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Pending</h1>
+      <img ng-if="!sourceTransactions" src="/static/img/loading.gif" th:src="@{/img/loading.gif}"/>
+      <table class="table table-striped table-condensed">
+        <tr ng-repeat="transaction in sourceTransactions | orderBy: 'transactionDate' : true">
+          <td>{{transaction.name}}</td>
+          <td>{{transaction.amount | currency}}</td>
+          <td>{{transaction.transactionDate | date }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>

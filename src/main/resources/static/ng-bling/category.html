@@ -1,12 +1,46 @@
-<div class="col-md-6">
-  <h2>{{category.name}}
-    <small>{{category.budget - sumTransactionAmounts(category.transactions) | currency}}</small>
-  </h2>
-  <p>You've used <strong>{{sumTransactionAmounts(category.transactions) | currency}}</strong> of the budgeted <strong>{{category.budget | currency}}</strong>, which leaves you
-    with <strong>{{category.budget - sumTransactionAmounts(category.transactions) | currency}}</strong> to spend on candy.</p>
-  <ul>
-    <li ng-repeat="transaction in category.transactions | orderBy : 'transactionDate'">{{transaction.name}} -
-      {{transaction.amount | currency}}
-    </li>
-  </ul>
+<div class="category-item col-md-6">
+  <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-xs-8">
+          <h1 class="panel-title">{{category.name}}
+            <small>{{category.budget - sumTransactionAmounts(category.transactions) | currency}}</small>
+          </h1>
+        </div>
+        <div class="col-xs-4">
+        <span class="category-add-icon glyphicon glyphicon-plus-sign pull-right" aria-hidden="true"
+              ng-click="newTransactionModal(category)"></span>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <uib-progressbar id="categoryTimeBar" value="getCategoryMoneyBarPercentage(category)"
+                       type="{{getTypeForCategoryMoneyBar()}}">
+        <strong>{{getCategoryMoneyBarPercentage(category)}}%</strong>
+      </uib-progressbar>
+      <uib-progressbar class="category-time-bar" value="percentageThroughPeriod" type="info">
+      </uib-progressbar>
+      <div class="row">
+        <div class="col-xs-6">
+          <p class="below-bar-text"><strong>{{category.budget - sumTransactionAmounts(category.transactions) |
+            currency}}</strong> remaining</p>
+        </div>
+        <div class="col-xs-6 text-right">
+          <p class="below-bar-text"><strong>{{sumTransactionAmounts(category.transactions) | currency}}</strong> of
+            <strong>{{category.budget | currency}}</strong></p>
+        </div>
+      </div>
+    </div>
+    <div ng-if="!category.transactions">
+      <p class="text-center">No {{category.name}} transactions</p>
+    </div>
+    <table class="category-transactions table">
+      <tr ng-repeat="transaction in category.transactions | orderBy : 'transactionDate'">
+        <td>{{transaction.name}}</td>
+        <td>{{transaction.amount | currency}}</td>
+        <td>{{transaction.transactionDate | date}}</td>
+      </tr>
+    </table>
+  </div>
 </div>

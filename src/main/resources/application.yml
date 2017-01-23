@@ -2,3 +2,5 @@ airtable:
   api-key: key5TLIaHVvapaQG0
 
 spring.thymeleaf.cache: false
+
+access.chase.password: l9zIlVgYVD6OKdOgLPpQMfgvhr4FJVvL

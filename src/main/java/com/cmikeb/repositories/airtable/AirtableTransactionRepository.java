@@ -1,11 +1,18 @@
 package com.cmikeb.repositories.airtable;
 
+import com.cmikeb.models.airtable.AirtableCreateRecord;
+import com.cmikeb.models.airtable.AirtableResult;
+import com.cmikeb.models.dao.TransactionDAO;
 import com.cmikeb.models.domain.Transaction;
 import com.cmikeb.models.airtable.AirtableRecord;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by cmbylund on 10/25/15.
@@ -25,7 +32,9 @@ public class AirtableTransactionRepository extends AirtableBaseRepository {
         List<AirtableRecord> airtableRecords = fetchAllRecords();
         List<Transaction> transactions = new ArrayList<>();
         for (AirtableRecord record : airtableRecords) {
-            transactions.add(mapTransaction(record));
+            if (record.getFields().get("Name") != null) {
+                transactions.add(mapTransaction(record));
+            }
         }
         return transactions;
     }
@@ -45,5 +54,19 @@ public class AirtableTransactionRepository extends AirtableBaseRepository {
 
         transaction.setCategoryId((String) categories.get(0));
         return transaction;
+    }
+
+    public Transaction createTransaction(TransactionDAO transaction) {
+
+        AirtableCreateRecord transactionRecord = new AirtableCreateRecord();
+        Map<String, Object> transactionMap = new HashMap<>();
+        transactionMap.put("Name", transaction.getName());
+        transactionMap.put("Amount", transaction.getAmount());
+        transactionMap.put("Category", Arrays.asList(transaction.getCategory().getId()));
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-M-dd");
+        transactionMap.put("Date", simpleDateFormat.format(transaction.getDate()));
+        transactionRecord.setFields(transactionMap);
+
+        return mapTransaction(postNewRecord(transactionRecord));
     }
 }
