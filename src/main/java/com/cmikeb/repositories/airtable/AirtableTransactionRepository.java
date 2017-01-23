@@ -5,6 +5,7 @@ import com.cmikeb.models.airtable.AirtableResult;
 import com.cmikeb.models.dao.TransactionDAO;
 import com.cmikeb.models.domain.Transaction;
 import com.cmikeb.models.airtable.AirtableRecord;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -20,12 +21,12 @@ import java.util.*;
 @Service
 public class AirtableTransactionRepository extends AirtableBaseRepository {
 
-
-    private static final String TABLE_ID = "tbl4bwe48jDCTEQaT";
+    @Value("${airtable.tables.transactions}")
+    private String tableId;
 
     @Override
     public String getTableId() {
-        return TABLE_ID;
+        return tableId;
     }
 
     public List<Transaction> getAllTransactions() {

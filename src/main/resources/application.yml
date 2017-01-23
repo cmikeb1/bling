@@ -1,8 +1,11 @@
 airtable:
-  api-key: key5TLIaHVvapaQG0
+  api-key: ENC(PoAgpRE4r44W+LkYCr02RvsnNWnxgeZ57mDSZqJ/X54=)
+  app-key: app6KKb1Hzsn3GWtl
   tables:
     transactions: tbl4bwe48jDCTEQaT
     categories: tblGlIcm6ugV76CqS
     constants: tblKQGrCM4R49pfAh
 
 spring.thymeleaf.cache: false
+
+jasypt.encryptor.password: overriddenInEnvironment

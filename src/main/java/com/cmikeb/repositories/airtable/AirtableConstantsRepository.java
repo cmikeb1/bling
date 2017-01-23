@@ -2,6 +2,7 @@ package com.cmikeb.repositories.airtable;
 
 import com.cmikeb.models.domain.Constants;
 import com.cmikeb.models.airtable.AirtableRecord;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,11 +12,12 @@ import java.util.List;
  */
 @Service
 public class AirtableConstantsRepository extends AirtableBaseRepository {
-    private static final String TABLE_ID = "tblKQGrCM4R49pfAh";
+    @Value("${airtable.tables.constants}")
+    private String tableId;
 
     @Override
     String getTableId() {
-        return TABLE_ID;
+        return tableId;
     }
 
     public Constants fetchConstants(){

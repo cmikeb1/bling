@@ -24,12 +24,20 @@ public abstract class AirtableBaseRepository {
 
     protected static final Logger log = LoggerFactory.getLogger(AirtableTransactionRepository.class);
 
-    protected static final String AIRTABLE_URI = "https://api.airtable.com/v0/app6KKb1Hzsn3GWtl/";
+    protected static final String AIRTABLE_URI = "https://api.airtable.com/v0/";
 
     @Value("${airtable.api-key}")
     protected String airtableApiKey;
 
+    @Value("${airtable.app-key}")
+    protected String airtableAppKey;
+
+    // each repository will supply their own tableId
     abstract String getTableId();
+
+    protected String getAirtableUri(){
+        return AIRTABLE_URI + airtableAppKey + "/";
+    }
 
     protected List<AirtableRecord> fetchAllRecords() {
         RestTemplate restTemplate = new RestTemplate();
@@ -38,7 +46,7 @@ public abstract class AirtableBaseRepository {
         HttpEntity<?> httpEntity = new HttpEntity<>(headers);
 
         log.info(String.format("Fetching airbase records for table %s", getTableId()));
-        HttpEntity<AirtableResult> result = restTemplate.exchange(AIRTABLE_URI + getTableId(), HttpMethod.GET, httpEntity, AirtableResult.class);
+        HttpEntity<AirtableResult> result = restTemplate.exchange(getAirtableUri() + getTableId(), HttpMethod.GET, httpEntity, AirtableResult.class);
         log.info(String.format("Found %d records for table %s", result.getBody().getRecords().size(), getTableId()));
         return result.getBody().getRecords();
     }
@@ -51,7 +59,7 @@ public abstract class AirtableBaseRepository {
         log.info(httpEntity.getBody().toString());
 
         log.info(String.format("Posting new record to table %s", getTableId()));
-        HttpEntity<AirtableRecord> result = restTemplate.exchange(AIRTABLE_URI + getTableId(), HttpMethod.POST, httpEntity, AirtableRecord.class);
+        HttpEntity<AirtableRecord> result = restTemplate.exchange(getAirtableUri() + getTableId(), HttpMethod.POST, httpEntity, AirtableRecord.class);
         log.info(String.format("Successfully created record with id %s", result.getBody().getId()));
         return result.getBody();
     }
