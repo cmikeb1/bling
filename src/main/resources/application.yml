@@ -1,6 +1,8 @@
 airtable:
   api-key: key5TLIaHVvapaQG0
+  tables:
+    transactions: tbl4bwe48jDCTEQaT
+    categories: tblGlIcm6ugV76CqS
+    constants: tblKQGrCM4R49pfAh
 
 spring.thymeleaf.cache: false
-
-access.chase.password: l9zIlVgYVD6OKdOgLPpQMfgvhr4FJVvL

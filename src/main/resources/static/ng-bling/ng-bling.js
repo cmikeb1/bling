@@ -83,11 +83,6 @@ angular.module('bling', ['ui.bootstrap'])
             $uibModalInstance.dismiss('cancel');
         };
     })
-    .controller('PendingCtrl', function ($scope, $http) {
-        $http.get("/api/source-transactions").success(function (data) {
-            $scope.sourceTransactions = data;
-        });
-    })
     .controller('MainViewCtrl', function ($scope, $http) {
 
         var MS_IN_DAY = 86400000;
